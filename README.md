@@ -6,7 +6,7 @@ Also includes register_hook to register the hook and subscribe.
 
 **Some setup and usage information**
 
-Obviosuly you need Python. Pretty sure anything Python 3.6 or newer will work but don't quote me on that.
+Obviously you need Python. Pretty sure anything Python 3.6 or newer will work but don't quote me on that.
 
 Install pre-reqs with `pip install -r requirements.txt`
 
