@@ -11,6 +11,10 @@ from azure.storage.queue import (
     QueueMessageFormat)
 from register_hook import register
 
+# Super simple flask API that handles events from the account activity API and places them on an azure queue.
+# Events are parsed and those that I actually want my bot to respond to are parsed and placed on the queue.
+
+###################################### MODELS ######################################
 
 class EventType(str, Enum):
   DIRECT = "dm"
@@ -30,6 +34,7 @@ class Event:
     self.text = text
     self.user_id = user_id
 
+###################################### SETUP ######################################
 
 # Data read in from env vars..
 CONS_SECRET = os.environ.get("TW_MOE_SECRET")
@@ -49,8 +54,8 @@ match_commands = re.compile(r'(?:{})'.format(
     '|'.join(map(re.escape, commands))), re.IGNORECASE)
 
 app = Flask(__name__)
-# Super simple flask API that handles events from the account activity API and places them on an azure queue.
-# Events are parsed and those that I actually want my bot to respond to are parsed and placed on the queue.
+
+###################################### APP ######################################
 
 @app.errorhandler(404)
 def not_found(e):
@@ -61,6 +66,11 @@ def not_found(e):
 @app.route("/")
 def hello():
     return "lol."
+
+
+@app.before_first_request
+def register_hook():
+    register()
 
 # CRC Check
 @app.route('/webhook', methods=['GET'])
@@ -118,7 +128,7 @@ def receive_event():
   }
   return response
 
+###################################### FOR RUNNING LOCALLY ######################################
 
 if __name__ == "__main__":
-  register()
-  # app.run(debug=True) # Uncomment this to run locally
+  app.run(debug=True)
