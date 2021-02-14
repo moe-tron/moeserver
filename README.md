@@ -20,6 +20,8 @@ Make sure wherever you're hosting this is fast enough to handle the CRC challeng
 
 You won't be able to actually get events when running this locally, but you can at least test the queue connection.
 
+The app is setup to be deployed to Azure as a weapp from the master branch, see .github/workflows.
+
 **Questions**
 
 Q) Why don't you just do the handling /replying here?
