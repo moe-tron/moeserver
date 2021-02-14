@@ -1,6 +1,6 @@
 # Twitter Account Activity Webhook Handler w/ Azure Queue Connection
 
-It's just a super simple flask app that shoves the incoming data onto an azure queue. You can then have a separate application that reads off of the queue and handles it.
+A simple flask app that sets up the webhook w/ twitter and handles incoming events. The events are parsed and only valid events that I want my bot to respond to are placed on the queue. 
 
 Also includes register_hook to register the hook and subscribe.
 
@@ -14,11 +14,11 @@ Set up ENV vars as needed.
 
 Run using `python server.py` to start up the app that handles the webhook.
 
-Run register_hook.py to register your webhook and subscribe.
+Run register_hook.py to register your webhook and subscribe. Note, you'll need to have a twitter dev account and a dev environment set up with twitter.
 
 Make sure wherever you're hosting this is fast enough to handle the CRC challenge, you need to be able to respond within 3 seconds I believe.
 
-You won't be able to actually get events when running this locally, but you can at least test the queue connection.
+You won't be able to actually get events when running this locally unless using something like ngrok, but you can at least test the queue connection.
 
 The app is setup to be deployed to Azure as a weapp from the master branch, see .github/workflows.
 

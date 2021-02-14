@@ -18,15 +18,11 @@ def register():
                             signature_method='HMAC-SHA1')
 
     # First we have to register our webhook, then we subscribe.
-    try:
-        register_url = 'https://api.twitter.com/1.1/account_activity/all/{}/webhooks.json?url={}'.format(ENVNAME, urllib.parse.quote_plus(WEBHOOK_URL))
-        headers = requests.utils.default_headers()
-        reg_response = auth.post(register_url,headers=headers)
-        sub_url = 'https://api.twitter.com/1.1/account_activity/all/{}/subscriptions.json'.format(ENVNAME)
-        sub_response = auth.post(sub_url,headers=headers)
-    except Exception as e:
-        print("Something went wrong while registering your webhook/subscribing: ")
-        print(e)
+    register_url = 'https://api.twitter.com/1.1/account_activity/all/{}/webhooks.json?url={}'.format(ENVNAME, urllib.parse.quote_plus(WEBHOOK_URL))
+    headers = requests.utils.default_headers()
+    reg_response = auth.post(register_url,headers=headers)
+    sub_url = 'https://api.twitter.com/1.1/account_activity/all/{}/subscriptions.json'.format(ENVNAME)
+    sub_response = auth.post(sub_url,headers=headers)
 
 if __name__ == "__main__":
     register()
