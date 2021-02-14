@@ -62,7 +62,7 @@ def not_found(e):
 def hello():
     return "lol."
 
-# CRC Challenge
+# CRC Check
 @app.route('/webhook', methods=['GET'])
 def webhook_challenge():
   try:
@@ -83,7 +83,7 @@ def webhook_challenge():
     }
     return response
 
-# Webhook, handles
+# Webhook, handles incoming events and puts events that we want onto the queue.
 @app.route("/webhook", methods=["POST"])
 def receive_event():
   twitter_events = request.get_json()
