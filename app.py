@@ -121,4 +121,4 @@ def receive_event():
 
 if __name__ == "__main__":
   register()
-  app.run(debug=True)
+  # app.run(debug=True) # Uncomment this to run locally
